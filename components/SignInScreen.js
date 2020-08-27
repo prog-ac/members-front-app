@@ -3,6 +3,8 @@ import React from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "../lib/firebase";
 
+import Index from "../pages";
+
 // Configure FirebaseUI.
 const uiConfig = {
   // Popup signin flow rather than redirect flow.
@@ -46,9 +48,10 @@ class SignInScreen extends React.Component {
   render() {
     if (!this.state.isSignedIn) {
       return (
-        <div>
-          <h1>My App</h1>
-          <p>Please sign-in:</p>
+        <div style={{textAlign: "center"}}>
+          <h1>神戸プログラミングアカデミー</h1>
+          <p>サインインしてください</p>
+          <p>登録されていないメールアドレスを使用すると新規登録になります</p>
           <StyledFirebaseAuth
             uiConfig={this.uiConfig}
             firebaseAuth={firebase.auth()}
@@ -56,16 +59,7 @@ class SignInScreen extends React.Component {
         </div>
       );
     }
-    return (
-      <div>
-        <h1>My App</h1>
-        <p>
-          Welcome {firebase.auth().currentUser.displayName}! You are now
-          signed-in!
-        </p>
-        <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
-      </div>
-    );
+    return ( <Index /> );
   }
 }
 export default SignInScreen;
