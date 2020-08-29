@@ -1,11 +1,15 @@
 
 // link file
 import UserCard from "./UserCard";
-import Index from "./index";
 
 // link library
 import React, { Component, useReducer } from 'react'
 import firebase from '../lib/firebase';
+import Link from 'next/link';
+
+// bootstorap
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 interface IState {
   allUser: any[];
@@ -50,7 +54,29 @@ class Body extends Component<{}, IState>{
       return <div style={{textAlign: "center"}}>Loading.....</div>;
    }
     return (
-      <UserCard alluser={this.state.allUser} />
+      // <UserCard alluser={this.state.allUser} />
+
+      <Container>
+        <Row>
+          { this.state.allUser.map(user =>
+            <div className="col-md-4" key={user.name}>
+              <Link
+                // ブラウザのURLに表示されるURL
+                // as={`/profile/`}
+                as={`/profile/${user.docId}`}
+                // ディレクトリのパス
+                href = {`/profile/`}>
+
+                <a style={CardStyle}>
+                  <UserCard userName={user.name} text={user.text} />
+                </a>
+              </Link>{' '}
+            </div>
+          )}
+        </Row>
+      </Container>
+
+
     )
   }
 

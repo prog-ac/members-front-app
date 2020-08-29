@@ -1,8 +1,6 @@
 
 // link file
-import Prof from "./profile";
-
-import BodyData from "./body";
+// import Prof from "./profile";
 
 // link library
 import React, { Component, useReducer } from 'react'
@@ -32,31 +30,40 @@ class UserCard extends Component<RouteProps>{
   // 再度レンダリングでユーザーのプロフを表示させる
   render() {
     return (
-      <Container>
-        <Row>
-          { this.props.alluser.map(user =>
-            <div className="col-md-4" key={user.name}>
-              <Link
-                // ブラウザのURLに表示されるURL
-                // as={`/profile/${user.docId}`}      <- ページを更新するとエラー
-                as={`/profile/`}
-                // ディレクトリのパス
-                href = {`/profile/`}>
+      <>
+        <Card>
+          {/* <Card.Img variant="top" src="imgURL" /> */}
+          <Card.Body>
+            <Card.Title>{ this.props.userName }</Card.Title>
+            <Card.Text>{ this.props.text }</Card.Text>
+          </Card.Body>
+        </Card>
+      </>
+      // <Container>
+      //   <Row>
+      //     { this.props.alluser.map(user =>
+      //       <div className="col-md-4" key={user.name}>
+      //         <Link
+      //           // ブラウザのURLに表示されるURL
+      //           // as={`/profile/${user.docId}`}      <- ページを更新するとエラー
+      //           as={`/profile/`}
+      //           // ディレクトリのパス
+      //           href = {`/profile/`}>
 
-                <a style={CardStyle}>
-                  <Card>
-                    {/* <Card.Img variant="top" src="imgURL" /> */}
-                    <Card.Body>
-                      <Card.Title>{ user.name }</Card.Title>
-                      <Card.Text>{ user.text }</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </a>
-              </Link>{' '}
-            </div>
-          )}
-        </Row>
-      </Container>
+      //           <a style={CardStyle}>
+      //             <Card>
+      //               {/* <Card.Img variant="top" src="imgURL" /> */}
+      //               <Card.Body>
+      //                 <Card.Title>{ user.name }</Card.Title>
+      //                 <Card.Text>{ user.text }</Card.Text>
+      //               </Card.Body>
+      //             </Card>
+      //           </a>
+      //         </Link>{' '}
+      //       </div>
+      //     )}
+      //   </Row>
+      // </Container>
     )
   }
 
