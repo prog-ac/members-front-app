@@ -16,7 +16,6 @@ class Index extends Component{
     currentUser: isNull as null,
   };
 
-  // コンポーネントがマウント(DOMに追加)された時(renderメソッドの直後に呼び出しされる)
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       this.setState({
@@ -25,8 +24,6 @@ class Index extends Component{
     });
   }
 
-  // クラスコンポーネントで定義しなければいけないメソッド（マウント、更新時に呼び出される）
-  // マウント、更新で呼び出される順番が異なるので注意
   render() {
     return (
       <div>
