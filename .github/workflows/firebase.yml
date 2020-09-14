@@ -1,0 +1,16 @@
+name: members-front-app
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  firebase-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/download-artifact@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
