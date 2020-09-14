@@ -3,14 +3,15 @@ on:
   push:
     branches:
       - master
-
 jobs:
   firebase-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@master
+      - run: yarn install
+      - run: yarn build:prod
       - uses: w9jds/firebase-action@master
-
         with:
           args: deploy --only hosting
         env:
