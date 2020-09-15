@@ -5,7 +5,8 @@ if (!firebase.apps.length) {
   if (process.env.NODE_ENV === "development") {
     app = firebase.initializeApp(require("../firebase.json"));
   } else {
-    firebase.initializeApp({
+    //console.log("aaaaaaa");
+    app = firebase.initializeApp({
       apiKey: process.env.FIREBASE_API_KEY,
       authDomain: process.env.FIREBASE_AUTH_DOMAIN,
       databaseURL: process.env.FIREBASE_DATABASE_URL,
