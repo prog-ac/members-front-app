@@ -48,7 +48,7 @@ class SignInScreen extends React.Component {
   render() {
     if (!this.state.isSignedIn) {
       return (
-        <div style={{textAlign: "center"}}>
+        <div style={{ textAlign: "center" }}>
           <h1>神戸プログラミングアカデミー</h1>
           <p>サインインしてください</p>
           <p>登録されていないメールアドレスを使用すると新規登録になります</p>
@@ -59,7 +59,7 @@ class SignInScreen extends React.Component {
         </div>
       );
     }
-    return ( <Index /> );
+    return <Index />;
   }
 }
 export default SignInScreen;
