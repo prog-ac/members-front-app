@@ -1,7 +1,7 @@
 // link file
-import Header from "./header";
-import Body from "./body";
-import Footer from "./footer";
+import Header from "../components/Index/header";
+import Body from "../components/Index/body";
+import Footer from "../components/Index/footer";
 import SignInScreen from "../components/SignInScreen";
 
 import { isNull } from "util";
