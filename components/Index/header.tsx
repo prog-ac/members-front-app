@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import SimpleMenu from "../components/menu";
+import SimpleMenu from "../menu";
 
 // bootstorap
 import Button from "react-bootstrap/Button";
