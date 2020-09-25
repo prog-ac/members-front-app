@@ -17,16 +17,7 @@ export default function SimpleMenu() {
     setAnchorEl(null);
   };
 
-  const movePage = () => {
-    <Link
-      // ブラウザのURLに表示されるURL
-      as={`/profile/1`}
-      // ディレクトリのパス
-      href={`/profile/`}
-    >
-      <a style={{ color: "black" }}></a>
-    </Link>;
-  };
+  const movePage = () => {};
 
   const logout = () => {
     firebase.auth().signOut();
@@ -50,7 +41,14 @@ export default function SimpleMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={movePage}>Profile</MenuItem>
+        <MenuItem>
+          <a
+            // ディレクトリのパス
+            href={`/profile`}
+          >
+            Profile
+          </a>
+        </MenuItem>
         <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
     </div>
