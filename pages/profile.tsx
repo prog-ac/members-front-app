@@ -29,7 +29,7 @@ class Profile extends Component {
           <button style={{ margin: "1%" }}>
             {" "}
             <Link as={`/profile/1/edit`} href={`/edit`}>
-              <a>編集</a>
+              <a className="example">編集</a>
             </Link>{" "}
           </button>
         ) : (
