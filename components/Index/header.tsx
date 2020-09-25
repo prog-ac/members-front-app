@@ -13,11 +13,11 @@ class Header extends Component {
 
   render() {
     return (
-      <header>
+      <header style={{ background: "#EEEEEE" }}>
         <div className="header" style={{ display: "flex" }}>
-          <h1 className="col-md-10" style={{ textAlign: "center" }}>
+          <h4 className="col-md-10" style={{ paddingTop: 20 }}>
             神戸プログラミングアカデミー
-          </h1>
+          </h4>
           <SimpleMenu />
           <p></p>
         </div>
