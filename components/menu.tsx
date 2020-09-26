@@ -40,6 +40,7 @@ export default function SimpleMenu() {
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        style={{ paddingTop: 23 }}
       >
         Menu
       </Button>
