@@ -31,6 +31,7 @@ export default function SimpleMenu() {
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        style={{ paddingTop: 23 }}
       >
         Menu
       </Button>
@@ -44,7 +45,7 @@ export default function SimpleMenu() {
         <MenuItem>
           <a
             // ディレクトリのパス
-            href={`/profile`}
+            href={`/profiles/`}
           >
             Profile
           </a>

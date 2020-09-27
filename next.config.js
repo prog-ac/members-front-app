@@ -1,3 +1,9 @@
+const withSass = require('@zeit/next-sass')
+
+module.exports = withSass({
+  //this is css sass config area
+})
+
 module.exports = {
   env: {
     FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
