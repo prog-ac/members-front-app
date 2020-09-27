@@ -13,11 +13,9 @@ class Header extends Component {
 
   render() {
     return (
-      <header style={{ background: "#EEEEEE" }}>
-        <div className="header" style={{ display: "flex" }}>
-          <h4 className="col-md-10" style={{ paddingTop: 20 }}>
-            神戸プログラミングアカデミー
-          </h4>
+      <header className="headerColor">
+        <div className="header">
+          <h4 className="col-md-10">神戸プログラミングアカデミー</h4>
           <SimpleMenu />
           <p></p>
         </div>
