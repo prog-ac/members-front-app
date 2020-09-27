@@ -7,7 +7,14 @@ import Link from "next/link";
 
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormFeedback,
+} from "reactstrap";
 
 class Profile extends React.Component {
   state = {
@@ -91,8 +98,8 @@ class Profile extends React.Component {
     const file = event.target.files[0];
     firebase.auth().onAuthStateChanged(async (user) => {
       const storage = firebase.storage();
-      const storageRef = storage.ref();
-      const imagesRef = storageRef.child(`images/${user.uid}.jpg`);
+      const storageRef = storage.ref("images");
+      const imagesRef = storageRef.child(`${user.uid}.jpg`);
       const upLoadTask = imagesRef.put(file);
       upLoadTask.on(
         "state_changed",
@@ -103,7 +110,7 @@ class Profile extends React.Component {
           console.log("err", error);
         },
         () => {
-          upLoadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          upLoadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             console.log("File available at", downloadURL);
             this.setState({
               imagePath: downloadURL,
@@ -121,7 +128,7 @@ class Profile extends React.Component {
           <h3>プロフィール編集</h3>
           <div className="text-right my-3">
             <Link href={`/`}>
-              <a>一覧へ戻る</a>
+              <Button>一覧へ戻る</Button>
             </Link>
           </div>
           <Formik
@@ -138,6 +145,11 @@ class Profile extends React.Component {
             onSubmit={(values) => this.handleOnSubmit(values)}
             validationSchema={Yup.object().shape({
               name: Yup.string().required("氏名は必須です。"),
+              name_kana: Yup.string().required("読み仮名は必須です。"),
+              slack_user_id: Yup.string().required("slackは必須です。"),
+              github_id: Yup.string().required("githubは必須です。"),
+              goal: Yup.string().required("目標は必須です。"),
+              message: Yup.string().required("メッセージは必須です。"),
             })}
           >
             {({
@@ -160,6 +172,7 @@ class Profile extends React.Component {
                     onBlur={handleBlur}
                     invalid={Boolean(touched.name && errors.name)}
                   />
+                  <FormFeedback>{errors.name}</FormFeedback>
                 </FormGroup>
                 <FormGroup>
                   <Label for="name_kana">読み仮名</Label>
@@ -172,6 +185,7 @@ class Profile extends React.Component {
                     onBlur={handleBlur}
                     invalid={Boolean(touched.name_kana && errors.name_kana)}
                   />
+                  <FormFeedback>{errors.name_kana}</FormFeedback>
                 </FormGroup>
                 <FormGroup>
                   <Label for="slack_user_id">SlackId</Label>
@@ -186,6 +200,7 @@ class Profile extends React.Component {
                       touched.slack_user_id && errors.slack_user_id
                     )}
                   />
+                  <FormFeedback>{errors.slack_user_id}</FormFeedback>
                 </FormGroup>
                 <FormGroup>
                   <Label for="github_id">GitHubID</Label>
@@ -198,6 +213,7 @@ class Profile extends React.Component {
                     onBlur={handleBlur}
                     invalid={Boolean(touched.github_id && errors.github_id)}
                   />
+                  <FormFeedback>{errors.github_id}</FormFeedback>
                 </FormGroup>
                 <FormGroup>
                   <Label for="job">仕事・学校</Label>
@@ -222,6 +238,7 @@ class Profile extends React.Component {
                     onBlur={handleBlur}
                     invalid={Boolean(touched.goal && errors.goal)}
                   />
+                  <FormFeedback>{errors.goal}</FormFeedback>
                 </FormGroup>
                 <FormGroup>
                   <Label for="message">メッセージ</Label>
@@ -234,6 +251,7 @@ class Profile extends React.Component {
                     onBlur={handleBlur}
                     invalid={Boolean(touched.message && errors.message)}
                   />
+                  <FormFeedback>{errors.message}</FormFeedback>
                 </FormGroup>
                 <FormGroup>
                   <Label for="description">自由欄</Label>
@@ -253,9 +271,9 @@ class Profile extends React.Component {
                     type="file"
                     name="file"
                     id="examplefile"
-                    onchange={(e) => this.upLoadImage(e)}
-                    onClick={(e) => {
-                      e.target.value = "";
+                    onChange={(event) => this.upLoadImage(event)}
+                    onClick={(event) => {
+                      event.target.value = "";
                     }}
                   />
                 </FormGroup>
