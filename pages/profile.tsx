@@ -1,5 +1,4 @@
 import Index from "./index";
-import Edit from "./edit";
 
 import React, { Component } from "react";
 import firebase from "../lib/firebase";
