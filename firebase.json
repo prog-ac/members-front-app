@@ -5,7 +5,7 @@
     "rewrites": [
       {
         "source": "/profiles",
-        "destination": "/profiles/index.html"
+        "destination": "/profiles.html"
       }
     ]
   }
