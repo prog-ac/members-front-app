@@ -59,7 +59,7 @@ class Body extends Component<{}, IState> {
       <Container>
         <Row>
           {this.state.allUser.map((user) => (
-            <div className="col-md-4" key={user.name}>
+            <div className="col-md-3" key={user.name}>
               <Link
                 // ブラウザのURLに表示されるURL
                 // as={`/profile/`}
