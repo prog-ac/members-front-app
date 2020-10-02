@@ -60,21 +60,14 @@ class Body extends Component<{}, IState> {
         <Row>
           {this.state.allUser.map((user) => (
             <div className="col-md-3" key={user.name}>
-              <Link
-                // ブラウザのURLに表示されるURL
-                // as={`/profile/`}
-                as={`/profile/${user.docId}`}
-                // ディレクトリのパス
-                href={`/profile/`}
-              >
-                <a style={CardStyle}>
-                  <UserCard
-                    userName={user.name}
-                    message={user.message}
-                    userImage={user.imagePath}
-                  />
-                </a>
-              </Link>{" "}
+              <a style={CardStyle}>
+                <UserCard
+                  userData={user}
+                  userName={user.name}
+                  message={user.message}
+                  userImage={user.imagePath}
+                />
+              </a>
             </div>
           ))}
         </Row>
