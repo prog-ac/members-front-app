@@ -28,39 +28,13 @@ class UserCard extends Component<RouteProps> {
   render() {
     return (
       <>
-        <Card style={{ paddingTop: 50, paddingBottom: 50 }}>
-          {/* <Card.Img variant="top" src="imgURL" /> */}
+        <Card className="cardSize">
           <Card.Body>
             <Card.Title>{this.props.userName}</Card.Title>
             <Card.Text>{this.props.text}</Card.Text>
           </Card.Body>
         </Card>
       </>
-      // <Container>
-      //   <Row>
-      //     { this.props.alluser.map(user =>
-      //       <div className="col-md-4" key={user.name}>
-      //         <Link
-      //           // ブラウザのURLに表示されるURL
-      //           // as={`/profile/${user.docId}`}      <- ページを更新するとエラー
-      //           as={`/profile/`}
-      //           // ディレクトリのパス
-      //           href = {`/profile/`}>
-
-      //           <a style={CardStyle}>
-      //             <Card>
-      //               {/* <Card.Img variant="top" src="imgURL" /> */}
-      //               <Card.Body>
-      //                 <Card.Title>{ user.name }</Card.Title>
-      //                 <Card.Text>{ user.text }</Card.Text>
-      //               </Card.Body>
-      //             </Card>
-      //           </a>
-      //         </Link>{' '}
-      //       </div>
-      //     )}
-      //   </Row>
-      // </Container>
     );
   }
 }
