@@ -5,6 +5,8 @@ import React from "react";
 import firebase from "../../lib/firebase";
 import Link from "next/link";
 
+import MDSpinner from "react-md-spinner";
+
 import { Formik } from "formik";
 import * as Yup from "yup";
 import {
@@ -18,6 +20,7 @@ import {
 
 class Profile extends React.Component {
   state = {
+    loading: true,
     currentUser: null,
     name: "",
     name_kana: "",
@@ -54,11 +57,11 @@ class Profile extends React.Component {
       let profRef = await firebase
         .firestore()
         .collection("memberProfile")
-        .doc(user.uid);
-      let allMember = profRef
+        .doc(user.uid)
         .get()
         .then((doc) => {
           this.setState({
+            loading: false,
             currentUser: user,
             name: doc.data().name,
             name_kana: doc.data().name_kana,
@@ -121,173 +124,183 @@ class Profile extends React.Component {
     });
   }
   render() {
-    return (
-      <div>
-        <Header />
-        <div className="col-md-10" style={{ marginLeft: "200px" }}>
-          <h3>プロフィール編集</h3>
-          <div className="text-right my-3">
-            <Link href={`/`}>
-              <Button>一覧へ戻る</Button>
-            </Link>
-          </div>
-          <Formik
-            initialValues={{
-              name: this.state.name,
-              name_kana: this.state.name_kana,
-              slack_user_id: this.state.slack_user_id,
-              github_id: this.state.github_id,
-              job: this.state.job,
-              goal: this.state.goal,
-              message: this.state.message,
-              description: this.state.description,
-            }}
-            onSubmit={(values) => this.handleOnSubmit(values)}
-            validationSchema={Yup.object().shape({
-              name: Yup.string().required("氏名は必須です。"),
-              name_kana: Yup.string().required("読み仮名は必須です。"),
-              slack_user_id: Yup.string().required("slackは必須です。"),
-              github_id: Yup.string().required("githubは必須です。"),
-              goal: Yup.string().required("目標は必須です。"),
-              message: Yup.string().required("メッセージは必須です。"),
-            })}
-          >
-            {({
-              handleSubmit,
-              handleChange,
-              handleBlur,
-              values,
-              errors,
-              touched,
-            }) => (
-              <Form onSubmit={handleSubmit}>
-                <FormGroup>
-                  <Label for="name">氏名</Label>
-                  <Input
-                    type="text"
-                    name="name"
-                    id="name"
-                    value={values.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    invalid={Boolean(touched.name && errors.name)}
-                  />
-                  <FormFeedback>{errors.name}</FormFeedback>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="name_kana">読み仮名</Label>
-                  <Input
-                    type="text"
-                    name="name_kana"
-                    id="name_kana"
-                    value={values.name_kana}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    invalid={Boolean(touched.name_kana && errors.name_kana)}
-                  />
-                  <FormFeedback>{errors.name_kana}</FormFeedback>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="slack_user_id">SlackId</Label>
-                  <Input
-                    type="text"
-                    name="slack_user_id"
-                    id="slack_user_id"
-                    value={values.slack_user_id}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    invalid={Boolean(
-                      touched.slack_user_id && errors.slack_user_id
-                    )}
-                  />
-                  <FormFeedback>{errors.slack_user_id}</FormFeedback>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="github_id">GitHubID</Label>
-                  <Input
-                    type="text"
-                    name="github_id"
-                    id="github_id"
-                    value={values.github_id}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    invalid={Boolean(touched.github_id && errors.github_id)}
-                  />
-                  <FormFeedback>{errors.github_id}</FormFeedback>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="job">仕事・学校</Label>
-                  <Input
-                    type="text"
-                    name="job"
-                    id="job"
-                    value={values.job}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    invalid={Boolean(touched.job && errors.job)}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="goal">目標（こうなりたい）</Label>
-                  <Input
-                    type="text"
-                    name="goal"
-                    id="goal"
-                    value={values.goal}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    invalid={Boolean(touched.goal && errors.goal)}
-                  />
-                  <FormFeedback>{errors.goal}</FormFeedback>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="message">メッセージ</Label>
-                  <Input
-                    type="text"
-                    name="message"
-                    id="message"
-                    value={values.message}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    invalid={Boolean(touched.message && errors.message)}
-                  />
-                  <FormFeedback>{errors.message}</FormFeedback>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="description">自由欄</Label>
-                  <Input
-                    type="textarea"
-                    name="description"
-                    id="description"
-                    value={values.description}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    invalid={Boolean(touched.description && errors.description)}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="examplefile">画像ファイル</Label>
-                  <Input
-                    type="file"
-                    name="file"
-                    id="examplefile"
-                    onChange={(event) => this.upLoadImage(event)}
-                    // onClick={(event) => {
-                    //   event.target.value = "";
-                    // }}
-                  />
-                </FormGroup>
+    if (!this.state.loading) {
+      return (
+        <div>
+          <Header />
+          <div className="col-md-10" style={{ marginLeft: "200px" }}>
+            <h3>プロフィール編集</h3>
+            <div className="text-right my-3">
+              <Link href={`/`}>
+                <Button>一覧へ戻る</Button>
+              </Link>
+            </div>
+            <Formik
+              initialValues={{
+                name: this.state.name,
+                name_kana: this.state.name_kana,
+                slack_user_id: this.state.slack_user_id,
+                github_id: this.state.github_id,
+                job: this.state.job,
+                goal: this.state.goal,
+                message: this.state.message,
+                description: this.state.description,
+              }}
+              onSubmit={(values) => this.handleOnSubmit(values)}
+              validationSchema={Yup.object().shape({
+                name: Yup.string().required("氏名は必須です。"),
+                name_kana: Yup.string().required("読み仮名は必須です。"),
+                slack_user_id: Yup.string().required("slackは必須です。"),
+                github_id: Yup.string().required("githubは必須です。"),
+                goal: Yup.string().required("目標は必須です。"),
+                message: Yup.string().required("メッセージは必須です。"),
+              })}
+            >
+              {({
+                handleSubmit,
+                handleChange,
+                handleBlur,
+                values,
+                errors,
+                touched,
+              }) => (
+                <Form onSubmit={handleSubmit}>
+                  <FormGroup>
+                    <Label for="name">氏名</Label>
+                    <Input
+                      type="text"
+                      name="name"
+                      id="name"
+                      value={values.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      invalid={Boolean(touched.name && errors.name)}
+                    />
+                    <FormFeedback>{errors.name}</FormFeedback>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="name_kana">読み仮名</Label>
+                    <Input
+                      type="text"
+                      name="name_kana"
+                      id="name_kana"
+                      value={values.name_kana}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      invalid={Boolean(touched.name_kana && errors.name_kana)}
+                    />
+                    <FormFeedback>{errors.name_kana}</FormFeedback>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="slack_user_id">SlackId</Label>
+                    <Input
+                      type="text"
+                      name="slack_user_id"
+                      id="slack_user_id"
+                      value={values.slack_user_id}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      invalid={Boolean(
+                        touched.slack_user_id && errors.slack_user_id
+                      )}
+                    />
+                    <FormFeedback>{errors.slack_user_id}</FormFeedback>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="github_id">GitHubID</Label>
+                    <Input
+                      type="text"
+                      name="github_id"
+                      id="github_id"
+                      value={values.github_id}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      invalid={Boolean(touched.github_id && errors.github_id)}
+                    />
+                    <FormFeedback>{errors.github_id}</FormFeedback>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="job">仕事・学校</Label>
+                    <Input
+                      type="text"
+                      name="job"
+                      id="job"
+                      value={values.job}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      invalid={Boolean(touched.job && errors.job)}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="goal">目標（こうなりたい）</Label>
+                    <Input
+                      type="text"
+                      name="goal"
+                      id="goal"
+                      value={values.goal}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      invalid={Boolean(touched.goal && errors.goal)}
+                    />
+                    <FormFeedback>{errors.goal}</FormFeedback>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="message">メッセージ</Label>
+                    <Input
+                      type="text"
+                      name="message"
+                      id="message"
+                      value={values.message}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      invalid={Boolean(touched.message && errors.message)}
+                    />
+                    <FormFeedback>{errors.message}</FormFeedback>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="description">自由欄</Label>
+                    <Input
+                      type="textarea"
+                      name="description"
+                      id="description"
+                      value={values.description}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      invalid={Boolean(
+                        touched.description && errors.description
+                      )}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="examplefile">画像ファイル</Label>
+                    <Input
+                      type="file"
+                      name="file"
+                      id="examplefile"
+                      onChange={(event) => this.upLoadImage(event)}
+                      // onClick={(event) => {
+                      //   event.target.value = "";
+                      // }}
+                    />
+                  </FormGroup>
 
-                <Button style={buttonstyle} type="submit">
-                  登録
-                </Button>
-              </Form>
-            )}
-          </Formik>
+                  <Button style={buttonstyle} type="submit">
+                    登録
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="loadingPosition">
+          <MDSpinner size={100} />;
+        </div>
+      );
+    }
   }
 }
 
