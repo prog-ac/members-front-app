@@ -61,12 +61,7 @@ class Body extends Component<{}, IState> {
           {this.state.allUser.map((user) => (
             <div className="col-md-3" key={user.name}>
               <a style={CardStyle}>
-                <UserCard
-                  userData={user}
-                  userName={user.name}
-                  message={user.message}
-                  userImage={user.imagePath}
-                />
+                <UserCard userData={user} />
               </a>
             </div>
           ))}

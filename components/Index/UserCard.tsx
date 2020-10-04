@@ -14,10 +14,6 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
-const CardStyle = {
-  color: "black",
-};
-
 //customStylesをカスタムしてModalのサイズ設定お願いします
 
 // const customStyles = {
@@ -36,7 +32,11 @@ const modalImageStyle = {
 };
 
 Modal.setAppElement("body");
-class UserCard extends Component<RouteProps> {
+interface Istate {
+  isModalOpen: boolean;
+}
+
+class UserCard extends Component<RouteProps, Istate> {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,14 +58,17 @@ class UserCard extends Component<RouteProps> {
   render() {
     return (
       <div>
-        <button onClick={this.openModal}>
-          <Card className="cardSize">
-            <img src={`${this.props.userImage}`} className="imageSize" />
+        <button onClick={this.openModal} className="cardSize">
+          <Card>
+            <img
+              src={`${this.props.userData.imagePath}`}
+              className="imageSize"
+            />
           </Card>
           <Card.Title className="titlePosition">
-            {this.props.userName}
+            {this.props.userData.name}
           </Card.Title>
-          <Card.Text className="messagePosition">{`「”${this.props.message}”」`}</Card.Text>
+          <Card.Text className="messagePosition">{`「”${this.props.userData.message}”」`}</Card.Text>
         </button>
 
         <Modal
@@ -76,7 +79,10 @@ class UserCard extends Component<RouteProps> {
         >
           <div>
             <div style={{ textAlign: "center" }}>
-              <img src={`${this.props.userImage}`} style={modalImageStyle} />
+              <img
+                src={`${this.props.userData.imagePath}`}
+                style={modalImageStyle}
+              />
             </div>
             <div>{this.props.userData.name}</div>
             <div>{this.props.userData.slack_user_id}</div>
