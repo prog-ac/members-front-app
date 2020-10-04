@@ -272,9 +272,9 @@ class Profile extends React.Component {
                     name="file"
                     id="examplefile"
                     onChange={(event) => this.upLoadImage(event)}
-                    onClick={(event) => {
-                      event.target.value = "";
-                    }}
+                    // onClick={(event) => {
+                    //   event.target.value = "";
+                    // }}
                   />
                 </FormGroup>
 
