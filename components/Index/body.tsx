@@ -68,7 +68,11 @@ class Body extends Component<{}, IState> {
                 href={`/profile/`}
               >
                 <a style={CardStyle}>
-                  <UserCard userName={user.name} text={user.text} />
+                  <UserCard
+                    userName={user.name}
+                    message={user.message}
+                    userImage={user.imagePath}
+                  />
                 </a>
               </Link>{" "}
             </div>

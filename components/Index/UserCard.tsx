@@ -29,11 +29,10 @@ class UserCard extends Component<RouteProps> {
     return (
       <>
         <Card className="cardSize">
-          <Card.Body>
-            <Card.Title>{this.props.userName}</Card.Title>
-            <Card.Text>{this.props.text}</Card.Text>
-          </Card.Body>
+          <img src={`${this.props.userImage}`} className="imageSize" />
         </Card>
+        <Card.Title className="titlePosition">{this.props.userName}</Card.Title>
+        <Card.Text className="messagePosition">{`「”${this.props.message}”」`}</Card.Text>
       </>
     );
   }
