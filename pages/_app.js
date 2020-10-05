@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/sass/footer.sass";
 import "../styles/sass/UserCard.sass";
 import "../styles/sass/header.sass";
+import "../styles/sass/pentagonChart.sass";
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;

@@ -1,5 +1,6 @@
 // link file
 // import Prof from "./profile";
+import PentagonChart from "./pentagonChart"
 
 // link library
 import React, { Component, useReducer } from "react";
@@ -91,6 +92,7 @@ class UserCard extends Component<RouteProps, Istate> {
             <div>{this.props.userData.message}</div>
             <div>{this.props.userData.goal}</div>
             <div>{this.props.userData.description}</div>
+            <PentagonChart />
           </div>
         </Modal>
       </div>
