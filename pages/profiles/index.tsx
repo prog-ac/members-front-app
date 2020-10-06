@@ -297,7 +297,7 @@ class Profile extends React.Component {
     } else {
       return (
         <div className="loadingPosition">
-          <MDSpinner size={100} />;
+          <MDSpinner size={100} />
         </div>
       );
     }
