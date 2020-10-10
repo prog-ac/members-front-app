@@ -5,6 +5,7 @@
 import React, { Component, useReducer } from "react";
 import { RouteProps } from "react-router";
 import Modal from "react-modal";
+import Backdrop from "@material-ui/core/Backdrop";
 
 import Link from "next/link";
 import Circle from "react-circle";
@@ -16,19 +17,15 @@ import Row from "react-bootstrap/Row";
 
 //customStylesをカスタムしてModalのサイズ設定お願いします
 
-// const customStyles = {
-//   content: {
-//     top: "50%",
-//     left: "50%",
-//     right: "20%",
-//     bottom: "-10%",
-//     marginRight: "-20%",
-//     transform: "translate(-50%, -50%)",
-//   },
-// };
-
-const modalImageStyle = {
-  width: "30%",
+const customStyles = {
+  content: {
+    top: "10%",
+    left: "50%",
+    right: "20%",
+    bottom: "-10%",
+    marginRight: "-20%",
+    transform: "translate(-50%, -50%)",
+  },
 };
 
 Modal.setAppElement("body");
@@ -74,23 +71,39 @@ class UserCard extends Component<RouteProps, Istate> {
         <Modal
           isOpen={this.state.isModalOpen}
           onRequestClose={this.closeModal}
-          // style={customStyles}
           contentLabel="userCard"
+          className="customStyles"
+          openTimeoutMS={2000}
+          closeTimeoutMS={200}
         >
           <div>
-            <div style={{ textAlign: "center" }}>
+            <div className="modalImagePosition">
               <img
                 src={`${this.props.userData.imagePath}`}
-                style={modalImageStyle}
+                className="modalImageStyle"
               />
             </div>
-            <div>{this.props.userData.name}</div>
-            <div>{this.props.userData.slack_user_id}</div>
-            <div>{this.props.userData.github_id}</div>
-            <div>{this.props.userData.job}</div>
-            <div>{this.props.userData.message}</div>
-            <div>{this.props.userData.goal}</div>
-            <div>{this.props.userData.description}</div>
+            <div className="modalFontStyle-Name">
+              氏名 : {this.props.userData.name}
+            </div>
+            <div className="modalFontStyle">
+              Slack_ID : {this.props.userData.slack_user_id}
+            </div>
+            <div className="modalFontStyle">
+              Github_ID : {this.props.userData.github_id}
+            </div>
+            <div className="modalFontStyle">
+              職業 : {this.props.userData.job}
+            </div>
+            <div className="modalFontStyle">
+              一言 : {this.props.userData.message}
+            </div>
+            <div className="modalFontStyle">
+              目標 : {this.props.userData.goal}
+            </div>
+            <div className="modalFontStyle">
+              自由欄 : {this.props.userData.description}
+            </div>
           </div>
         </Modal>
       </div>
