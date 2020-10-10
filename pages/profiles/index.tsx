@@ -4,7 +4,7 @@ import React from "react";
 
 import firebase from "../../lib/firebase";
 import Link from "next/link";
-
+import Router from "next/router";
 import MDSpinner from "react-md-spinner";
 
 import { Formik } from "formik";
@@ -285,7 +285,7 @@ class Profile extends React.Component {
                   </FormGroup>
 
                   <Button style={buttonstyle} type="submit">
-                    登録
+                    <span onClick={() => Router.push("/")}>登録</span>
                   </Button>
                 </Form>
               )}
