@@ -15,6 +15,7 @@ class Header extends Component {
     return (
       <header className="headerColor">
         <div className="header">
+          <img src="/static/prog-ac-members-site-logo.png" />
           <h4 className="col-md-10">神戸プログラミングアカデミー</h4>
           <SimpleMenu />
           <p></p>
