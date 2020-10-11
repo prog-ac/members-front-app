@@ -5,8 +5,9 @@ import React, { Component } from "react";
 function Footer() {
   return (
     <footer className="footer">
-      <hr />
-      <p className="footerWord">kobe-prog-ac</p>
+      <img src="/kobe-footer.png" className="footerImgStyle" />
+      {/* <hr />
+      <p className="footerWord">kobe-prog-ac</p> */}
     </footer>
   );
 }
