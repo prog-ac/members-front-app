@@ -55,7 +55,7 @@ class UserCard extends Component<RouteProps, Istate> {
   render() {
     return (
       <div>
-        <button onClick={this.openModal} className="cardSize">
+        <button onClick={this.openModal} className="cardStyle">
           <Card>
             <img
               src={`${this.props.userData.imagePath}`}
