@@ -47,7 +47,6 @@ class Profile extends React.Component {
         goal: values.goal,
         message: values.message,
         description: values.description,
-        imagePath: this.state.imagePath,
       });
     alert("登録しました");
     Router.push("/");
@@ -116,6 +115,13 @@ class Profile extends React.Component {
         () => {
           upLoadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             console.log("File available at", downloadURL);
+            firebase
+              .firestore()
+              .collection("memberProfile")
+              .doc(this.state.currentUser.uid)
+              .update({
+                imagePath: downloadURL,
+              });
             this.setState({
               imagePath: downloadURL,
             });
