@@ -50,6 +50,7 @@ class Profile extends React.Component {
         imagePath: this.state.imagePath,
       });
     alert("登録しました");
+    Router.push("/");
   };
 
   async componentDidMount() {
@@ -278,14 +279,11 @@ class Profile extends React.Component {
                       name="file"
                       id="examplefile"
                       onChange={(event) => this.upLoadImage(event)}
-                      // onClick={(event) => {
-                      //   event.target.value = "";
-                      // }}
                     />
                   </FormGroup>
 
                   <Button style={buttonstyle} type="submit">
-                    <span onClick={() => Router.push("/")}>登録</span>
+                    登録
                   </Button>
                 </Form>
               )}

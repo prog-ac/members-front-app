@@ -17,12 +17,15 @@ class Header extends Component {
       <header className="headerColor">
         <div className="header">
           <img src="/members-site-logo.png" className="headerLogoStyle" />
-          <Link href={`/`}>
-            <h4 className="col-md-10">
-              神戸プログラミングアカデミー
-              <h5 className="headerSubTitle">~Members Site~</h5>
+          <div className="col-md-10">
+            <h4>
+              <a className="headerTitleStyle" href={`/`}>
+                神戸プログラミングアカデミー
+                <br />
+                <span className="headerSubTitle">~Members Site~</span>
+              </a>
             </h4>
-          </Link>
+          </div>
           <SimpleMenu />
           <p></p>
         </div>
