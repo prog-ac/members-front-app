@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import SimpleMenu from "../menu";
+import Link from "next/link";
 
 // bootstorap
 import Button from "react-bootstrap/Button";
@@ -16,10 +17,15 @@ class Header extends Component {
       <header className="headerColor">
         <div className="header">
           <img src="/members-site-logo.png" className="headerLogoStyle" />
-          <h4 className="col-md-10">
-            神戸プログラミングアカデミー
-            <h5 className="headerSubTitle">~Members Site~</h5>
-          </h4>
+          <div className="col-md-10">
+            <h4>
+              <a className="headerTitleStyle" href={`/`}>
+                神戸プログラミングアカデミー
+                <br />
+                <span className="headerSubTitle">~Members Site~</span>
+              </a>
+            </h4>
+          </div>
           <SimpleMenu />
           <p></p>
         </div>

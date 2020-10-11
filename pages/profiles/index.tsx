@@ -4,7 +4,7 @@ import React from "react";
 
 import firebase from "../../lib/firebase";
 import Link from "next/link";
-
+import Router from "next/router";
 import MDSpinner from "react-md-spinner";
 
 import { Formik } from "formik";
@@ -50,6 +50,7 @@ class Profile extends React.Component {
         imagePath: this.state.imagePath,
       });
     alert("登録しました");
+    Router.push("/");
   };
 
   async componentDidMount() {
@@ -278,9 +279,6 @@ class Profile extends React.Component {
                       name="file"
                       id="examplefile"
                       onChange={(event) => this.upLoadImage(event)}
-                      // onClick={(event) => {
-                      //   event.target.value = "";
-                      // }}
                     />
                   </FormGroup>
 
