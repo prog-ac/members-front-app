@@ -17,8 +17,6 @@ export default function SimpleMenu() {
     setAnchorEl(null);
   };
 
-  const movePage = () => {};
-
   const logout = () => {
     firebase.auth().signOut();
 
@@ -26,7 +24,7 @@ export default function SimpleMenu() {
   };
 
   return (
-    <div className="col-md-2">
+    <div className="menu">
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
@@ -43,12 +41,10 @@ export default function SimpleMenu() {
         onClose={handleClose}
       >
         <MenuItem>
-          <a
-            // ディレクトリのパス
-            href={`/profiles/`}
-          >
-            Profile
-          </a>
+          <a className="menulink" href={`/profiles/`}>プロフィール編集</a>
+        </MenuItem>
+        <MenuItem>
+          <a className="menulink" href={`/schedules/`}>スケジュール追加</a>
         </MenuItem>
         <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>

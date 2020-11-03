@@ -14,22 +14,17 @@ class Header extends Component {
 
   render() {
     return (
-      <header className="headerColor">
+      <header>
         <div className="header">
           <img src="/members-site-logo.png" className="headerLogoStyle" />
-          <div className="col-md-10">
-            <h4>
-              <a className="headerTitleStyle" href={`/`}>
-                神戸プログラミングアカデミー
-                <br />
-                <span className="headerSubTitle">~Members Site~</span>
-              </a>
-            </h4>
-          </div>
+          <h4>
+            <a className="headerTitleStyle" href={`/`}>
+              神戸プログラミングアカデミー<br />
+              <span className="headerSubTitle">~Members Site~</span>
+            </a>
+          </h4>
           <SimpleMenu />
-          <p></p>
         </div>
-        <hr />
       </header>
     );
   }

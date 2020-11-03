@@ -135,7 +135,7 @@ class Profile extends React.Component {
       return (
         <div>
           <Header />
-          <div className="col-md-10" style={{ marginLeft: "200px" }}>
+          <div className="col-md-10 profilleStyle">
             <h3>プロフィール編集</h3>
             <div className="text-right my-3">
               <Link href={`/`}>
